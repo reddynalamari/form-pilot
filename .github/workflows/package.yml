@@ -28,11 +28,18 @@ jobs:
           retention-days: 30
 
       - name: Publish GitHub prerelease
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: build-${{ github.sha }}
-          name: Form Pilot build ${{ github.sha }}
-          target_commitish: ${{ github.sha }}
-          prerelease: true
-          generate_release_notes: false
-          files: form-pilot-${{ github.sha }}.zip
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          tag="build-${GITHUB_SHA}"
+          zip="form-pilot-${GITHUB_SHA}.zip"
+          if gh release view "$tag" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            gh release upload "$tag" "$zip" --repo "$GITHUB_REPOSITORY" --clobber
+          else
+            gh release create "$tag" "$zip" \
+              --repo "$GITHUB_REPOSITORY" \
+              --target "$GITHUB_SHA" \
+              --title "Form Pilot build ${GITHUB_SHA}" \
+              --notes "Automatic extension package for commit ${GITHUB_SHA}." \
+              --prerelease
+          fi
