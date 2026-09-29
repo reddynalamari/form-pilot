@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   package:
@@ -26,3 +26,13 @@ jobs:
           path: form-pilot-${{ github.sha }}.zip
           if-no-files-found: error
           retention-days: 30
+
+      - name: Publish GitHub prerelease
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: build-${{ github.sha }}
+          name: Form Pilot build ${{ github.sha }}
+          target_commitish: ${{ github.sha }}
+          prerelease: true
+          generate_release_notes: false
+          files: form-pilot-${{ github.sha }}.zip

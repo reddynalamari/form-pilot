@@ -92,7 +92,7 @@ Then open `http://localhost:8000/test/test-form.html`. Direct `file://` testing 
 
 ## Automatic ZIP Downloads
 
-GitHub Actions packages the extension automatically on every push. The workflow creates a ZIP containing the tracked files from that exact commit and uploads it as a workflow artifact for 30 days.
+GitHub Actions packages the extension automatically on every push. The workflow creates a ZIP containing the tracked files from that exact commit, uploads it as a workflow artifact for 30 days, and publishes the same ZIP as a GitHub prerelease.
 
 To download a package:
 
@@ -100,6 +100,8 @@ To download a package:
 2. Open the **Actions** tab.
 3. Select **Package extension** and open the workflow run for the commit you want.
 4. Download the ZIP from the **Artifacts** section.
+
+The same ZIP is also available permanently from the repository's **Releases** section. Each automatic build uses a tag in the form `build-<commit-sha>` and is marked as a prerelease.
 
 You can also start the workflow manually with **Run workflow**. The ZIP is named `form-pilot-<commit-sha>.zip`.
 
