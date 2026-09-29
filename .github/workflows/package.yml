@@ -12,12 +12,17 @@ permissions:
 jobs:
   package:
     runs-on: ubuntu-latest
+
     steps:
       - name: Check out commit
         uses: actions/checkout@v4
 
       - name: Create extension ZIP
-        run: git archive --format=zip --output="form-pilot-${GITHUB_SHA}.zip" HEAD
+        run: |
+          git archive \
+            --format=zip \
+            --output="form-pilot-${GITHUB_SHA}.zip" \
+            HEAD
 
       - name: Upload ZIP artifact
         uses: actions/upload-artifact@v4
@@ -27,19 +32,21 @@ jobs:
           if-no-files-found: error
           retention-days: 30
 
-      - name: Publish GitHub prerelease
+      - name: Publish GitHub release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           tag="build-${GITHUB_SHA}"
           zip="form-pilot-${GITHUB_SHA}.zip"
+
           if gh release view "$tag" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
-            gh release upload "$tag" "$zip" --repo "$GITHUB_REPOSITORY" --clobber
+            gh release upload "$tag" "$zip" \
+              --repo "$GITHUB_REPOSITORY" \
+              --clobber
           else
             gh release create "$tag" "$zip" \
               --repo "$GITHUB_REPOSITORY" \
               --target "$GITHUB_SHA" \
               --title "Form Pilot build ${GITHUB_SHA}" \
-              --notes "Automatic extension package for commit ${GITHUB_SHA}." \
-              --prerelease
+              --notes "Automatic extension package for commit ${GITHUB_SHA}."
           fi

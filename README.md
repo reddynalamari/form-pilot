@@ -101,7 +101,7 @@ To download a package:
 3. Select **Package extension** and open the workflow run for the commit you want.
 4. Download the ZIP from the **Artifacts** section.
 
-The same ZIP is also available permanently from the repository's **Releases** section. Each automatic build uses a tag in the form `build-<commit-sha>` and is marked as a prerelease.
+The same ZIP is also available permanently from the repository's **Releases** section. Each automatic build uses a tag in the form `build-<commit-sha>` and is published as the latest release.
 
 You can also start the workflow manually with **Run workflow**. The ZIP is named `form-pilot-<commit-sha>.zip`.
 
