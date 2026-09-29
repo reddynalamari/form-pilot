@@ -26,6 +26,16 @@
   function clearSearch() { if (searchTimer) { clearInterval(searchTimer); searchTimer = null; } }
 
   async function exec(step, profile, idx, flow) {
+    if (step.type === 'navigate') {
+      if (!step.url) return { error: 'Navigation step has no URL' };
+      await patch({ stepIndex: idx + 1 });
+      location.href = step.url;
+      return 'navigated';
+    }
+    if (step.type === 'wait') {
+      await FA.sleep(Math.max(0, Number(step.delayMs) || 0));
+      return 'ok';
+    }
     if (step.type === 'captchaPause') {
       const c = await FA.waitFor(() => FA.findCaptcha() || FA.findCaptchaInput(), 2500);
       if (c) { c.scrollIntoView({ block: 'center' }); FA.highlight(c); }
