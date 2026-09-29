@@ -1,0 +1,41 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Form Pilot – Manage</title>
+<style>
+  body{max-width:860px;margin:24px auto;padding:0 16px;font:14px/1.5 system-ui,sans-serif;color:#12222b;background:#f6f8f9}
+  h1{font-size:22px}h2{margin-top:32px;font-size:16px}
+  .card{background:#fff;border:1px solid #dde4e8;border-radius:10px;padding:14px 16px;margin:12px 0}
+  input,select,textarea{padding:5px 8px;border:1px solid #c3ced4;border-radius:6px;font:inherit}
+  button{font:inherit;font-weight:600;border:0;border-radius:6px;padding:5px 11px;cursor:pointer;background:#2f9e8f;color:#fff}
+  button.d{background:#e5484d}button.g{background:#dde4e8;color:#12222b}
+  table{width:100%;border-collapse:collapse}td,th{padding:5px 6px;border-bottom:1px solid #eef2f4;text-align:left;vertical-align:middle}
+  .muted{color:#5b6f79}.k{width:38%}
+</style></head>
+<body>
+<h1>Form Pilot</h1>
+<p class="muted">Data stays in this browser (chrome.storage.local). Nothing is sent anywhere.</p>
+
+<h2>Settings</h2>
+<div class="card" id="settingsCard">
+  <table>
+    <tr><td class="k">How long to search for a field before reporting it failed</td>
+      <td><input id="searchTimeoutMs" type="number" min="500" step="500" style="width:90px"> ms</td></tr>
+    <tr><td class="k">On a failed step or pause, auto-continue</td>
+      <td><label><input id="autoAdvanceEnabled" type="checkbox"> enabled</label></td></tr>
+    <tr><td class="k">Wait this long first (0 = continue immediately)</td>
+      <td><input id="autoAdvanceMs" type="number" min="0" step="250" style="width:90px"> ms</td></tr>
+    <tr><td class="k">What to do when it auto-continues</td>
+      <td><select id="autoAdvanceAction"><option value="skip">Skip the failed step</option><option value="retry">Retry the failed step</option></select></td></tr>
+    <tr><td class="k">On-page notification position</td>
+      <td><span class="muted">Drag it anywhere on the page while a flow is running.</span> <button id="resetPos" class="g">Reset to bottom-right</button></td></tr>
+  </table>
+</div>
+
+<h2>Profiles</h2>
+<p class="muted">A profile is a set of named values (e.g. <code>pilgrim1.name</code>). Link recorded steps to these keys under Flows, so one recording works for different people.</p>
+<div id="profiles"></div>
+<button id="addProfile">+ New profile</button>
+
+<h2>Flows</h2>
+<div id="flows"></div>
+<script src="options.js"></script>
+</body></html>

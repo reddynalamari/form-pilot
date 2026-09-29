@@ -1,0 +1,31 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Form Pilot test page</title>
+<style>body{font:15px system-ui;max-width:560px;margin:30px auto;padding:0 16px}label{display:block;margin:12px 0 4px;font-weight:600}
+input,select,textarea{padding:6px;width:100%;box-sizing:border-box}.r label{display:inline;font-weight:400;margin-right:12px}.r input{width:auto}
+button{margin-top:16px;padding:8px 16px}#step2{display:none}.cap{margin:12px 0;padding:10px;border:1px dashed #999}</style></head>
+<body>
+<h1>Pilgrim registration (test)</h1>
+<form id="f1" onsubmit="return false">
+  <div id="step1">
+    <label for="fn_83921">Full Name *</label><input id="fn_83921" name="fullName" placeholder="Enter name">
+    <label>Age</label><input name="age" type="number">
+    <label>Gender</label>
+    <div class="r"><label><input type="radio" name="g" value="Male"> Male</label><label><input type="radio" name="g" value="Female"> Female</label></div>
+    <label>ID type</label><select name="idType"><option value="">Select</option><option value="AADHAAR">Aadhaar</option><option value="PASSPORT">Passport</option></select>
+    <label><input type="checkbox" name="terms" style="width:auto"> I agree to the terms</label>
+    <button id="next" type="button">Continue</button>
+  </div>
+  <div id="step2">
+    <label>Mobile</label><input name="mobile">
+    <label>Password (never recorded)</label><input type="password" name="pw">
+    <div class="cap"><img alt="captcha" id="captchaImg" width="120" height="40" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='40'><text x='10' y='28' font-size='24'>7Xk9</text></svg>">
+      <input name="captchaText" placeholder="Type captcha"></div>
+    <button id="submit" type="button">Submit</button>
+  </div>
+</form>
+<p id="out"></p>
+<script>
+  document.getElementById('next').onclick = () => setTimeout(() => { step1.style.display = 'none'; step2.style.display = 'block'; }, 400); // delayed "SPA" step
+  document.getElementById('submit').onclick = () => { out.textContent = 'Submitted: ' + JSON.stringify(Object.fromEntries(new FormData(f1))); };
+</script>
+</body></html>

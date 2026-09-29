@@ -1,0 +1,18 @@
+{
+  "manifest_version": 3,
+  "name": "Form Pilot",
+  "version": "0.1.0",
+  "description": "Record a form-filling flow once, replay it in seconds. Pauses for captchas and passwords.",
+  "permissions": ["storage", "scripting", "tabs"],
+  "host_permissions": ["http://*/*", "https://*/*"],
+  "background": { "service_worker": "background/service-worker.js" },
+  "action": { "default_popup": "popup/popup.html", "default_title": "Form Pilot" },
+  "options_page": "options/options.html",
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["content/core.js", "content/settings.js", "content/overlay.js", "content/recorder.js", "content/replayer.js", "content/main.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}

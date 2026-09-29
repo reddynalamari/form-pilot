@@ -1,0 +1,27 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Form Pilot</title>
+<style>
+  body{margin:0;width:320px;font:13px/1.4 system-ui,sans-serif;background:#f6f8f9;color:#12222b}
+  header{background:#12222b;color:#fff;padding:12px 14px;font-weight:700;font-size:15px}
+  section{padding:12px 14px;border-bottom:1px solid #dde4e8}
+  h2{margin:0 0 8px;font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:#5b6f79}
+  input,select{width:100%;box-sizing:border-box;padding:6px 8px;border:1px solid #c3ced4;border-radius:6px;font:inherit;margin-bottom:8px}
+  button{font:inherit;font-weight:600;border:0;border-radius:6px;padding:6px 12px;cursor:pointer;background:#2f9e8f;color:#fff}
+  button.rec{background:#e5484d}button.g{background:#dde4e8;color:#12222b}
+  .row{display:flex;gap:8px;align-items:center;justify-content:space-between;padding:6px 0}
+  .row span{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .muted{color:#5b6f79}#msg{padding:8px 14px;color:#b45309}
+  a{color:#2f9e8f;cursor:pointer}
+</style></head>
+<body>
+<header>Form Pilot</header>
+<section id="recSec"></section>
+<section>
+  <h2>Saved flows</h2>
+  <select id="profile"></select>
+  <div id="flows"></div>
+</section>
+<section><a id="opts">Manage flows &amp; profiles</a></section>
+<div id="msg"></div>
+<script src="popup.js"></script>
+</body></html>
