@@ -90,6 +90,19 @@ python -m http.server
 
 Then open `http://localhost:8000/test/test-form.html`. Direct `file://` testing may require enabling **Allow access to file URLs** on the extension details page.
 
+## Automatic ZIP Downloads
+
+GitHub Actions packages the extension automatically on every push. The workflow creates a ZIP containing the tracked files from that exact commit and uploads it as a workflow artifact for 30 days.
+
+To download a package:
+
+1. Open the repository on GitHub.
+2. Open the **Actions** tab.
+3. Select **Package extension** and open the workflow run for the commit you want.
+4. Download the ZIP from the **Artifacts** section.
+
+You can also start the workflow manually with **Run workflow**. The ZIP is named `form-pilot-<commit-sha>.zip`.
+
 ## Project Layout
 
 | Path | Responsibility |

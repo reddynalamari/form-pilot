@@ -1,0 +1,28 @@
+name: Package extension
+
+on:
+  push:
+    branches:
+      - "**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out commit
+        uses: actions/checkout@v4
+
+      - name: Create extension ZIP
+        run: git archive --format=zip --output="form-pilot-${GITHUB_SHA}.zip" HEAD
+
+      - name: Upload ZIP artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: form-pilot-${{ github.sha }}
+          path: form-pilot-${{ github.sha }}.zip
+          if-no-files-found: error
+          retention-days: 30
